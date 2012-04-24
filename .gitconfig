@@ -1,0 +1,9 @@
+[user]
+	name = Diogo Resende
+	email = dresende@thinkdigital.pt
+
+[mergetool]
+	keepBackup = true
+
+[color]
+	ui = always
