@@ -1,4 +1,8 @@
+# my alias
 alias ls="ls -G"
+
+# git bash completion
+source `brew --prefix`/etc/bash_completion.d/git-completion.bash
 
 # autho: Tiago Batista
 function __shortpath3 {
@@ -40,6 +44,7 @@ function build_my_bash_prompt() {
 	local success_command="\`if [ \$? = 0 ]; then echo \e[32m✓\e[0m; else echo \e[31m✖\e[0m; fi\`"
 	local command_id="\e[1;36m\!\e[33m:\e[36m\j\e[0m"
 	local path="\e[33m$(_dir_chomp "${PWD}" 30)\e[0m"
+	local gitbranch=`__git_ps1 "%s"`
 	local screensession=""
 
 	if [ "$USER" = "root" ]; then
@@ -51,9 +56,12 @@ function build_my_bash_prompt() {
 	fi
 
 	[[ $TERM =~ screen ]] && screensession="\e[31m(in screen)\e[0m "
+	[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && gitbranch="${gitbranch}\e[36m*"
+
+	[[ ${#gitbranch} -gt 0 ]] && gitbranch="\e[33m{\e[35m${gitbranch}\e[33m}\e[0m"
 
 	echo -ne "\033]0;${HOSTNAME}: ${PWD}\007"
-	PS1="${success_command} ${command_id} ${path} ${screensession}${prompt} "
+	PS1="${success_command} ${command_id} ${path}${gitbranch} ${screensession}${prompt} "
 	PS2="${prompt2} "
 
 	shopt -s checkwinsize
