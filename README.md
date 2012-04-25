@@ -1,6 +1,8 @@
 dotfiles
 ========
 
-My dot files (.bashrc, ..)
+My dot files:
 
-Note: there is a shortpath command that is not here yet, I have it in NodeJS and I'll post it here someday..
+- .bashrc
+- .bash_profile (symlink to .bashrc)
+- .gitconfig
