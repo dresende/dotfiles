@@ -58,7 +58,7 @@ function build_my_bash_prompt() {
 	[[ $TERM =~ screen ]] && screensession="\e[31m(in screen)\e[0m "
 	[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && gitbranch="${gitbranch}\e[36m*"
 
-	[[ ${#gitbranch} -gt 0 ]] && gitbranch="\e[33m{\e[35m${gitbranch}\e[33m}\e[0m"
+	[[ ${#gitbranch} -gt 0 ]] && gitbranch="\e[35m${gitbranch}\e[0m"
 
 	echo -ne "\033]0;${HOSTNAME}: ${PWD}\007"
 	PS1="${success_command} ${command_id} ${path}${gitbranch} ${screensession}${prompt} "
