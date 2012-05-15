@@ -54,6 +54,12 @@ function build_my_bash_prompt() {
 		local prompt="\e[32m›\e[0m"
 		local prompt2="\e[32m›\e[0m"
 	fi
+	if [ "$gitbranch" = "master" ]; then
+		gitbranch="(master)"
+	fi
+	if [ ! -z "$gitbranch" ]; then
+		gitbranch=" ${gitbranch}"
+	fi
 
 	[[ $TERM =~ screen ]] && screensession="\e[31m(in screen)\e[0m "
 	[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && gitbranch="${gitbranch}\e[36m*"
